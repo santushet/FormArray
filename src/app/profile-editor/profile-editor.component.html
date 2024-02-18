@@ -1,4 +1,4 @@
-<form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+<!-- <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
   <label for="first-name">First Name: </label>
   <input id="first-name" type="text" formControlName="firstName" required />
 
@@ -25,9 +25,9 @@
     <h2>Aliases</h2>
     <button type="button" (click)="addAlias()">+ Add another alias</button>
 
-    <div *ngFor="let alias of aliases.controls; let i = index">
-      <!-- The repeated alias template -->
-      <label for="alias-{{ i }}">Alias:</label>
+    <div *ngFor="let alias of aliases.controls; let i = index"> -->
+<!-- The repeated alias template -->
+<!-- <label for="alias-{{ i }}">Alias:</label>
       <input id="alias-{{ i }}" type="text" [formControlName]="i" />
     </div>
   </div>
@@ -42,4 +42,45 @@
 
 <p>Form Status: {{ profileForm.status }}</p>
 
-<button type="button" (click)="updateProfile()">Update Profile</button>
+<button type="button" (click)="updateProfile()">Update Profile</button> -->
+
+<form class="form-group" [formGroup]="ToDoListForm">
+  <div formArrayName="items">
+    <table class="table-bordered">
+      <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+      </tr>
+      <tr
+        *ngFor="let x of itemsArray.controls; let i = index"
+        [formGroupName]="i"
+      >
+        <td>
+          <input
+            class="form-control"
+            formControlName="firstName"
+            placeholder="Item name"
+          />
+        </td>
+        <td>
+          <input
+            class="form-control"
+            formControlName="lastName"
+            placeholder="Item name"
+          />
+        </td>
+        <td>
+          <button (click)="deleteItem(i)">Delete Item</button>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <button (click)="addNewItem()">Add New Item</button>
+  <button (click)="deleteAll()">Delete All</button>
+</form>
+
+<b>Form's Value:</b>
+{{ ToDoListForm.value | json }}
+<br />
+<b>Form is Valid ? :</b>
+{{ ToDoListForm.valid }}
