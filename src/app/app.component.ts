@@ -1,7 +1,6 @@
 import { NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { NameEditorComponent } from './name-editor/name-editor.component';
 import { ProfileEditorComponent } from './profile-editor/profile-editor.component';
 
 export type EditorType = 'name' | 'profile';
@@ -11,15 +10,6 @@ export type EditorType = 'name' | 'profile';
   selector: 'app-root',
   template: `
     <h1>Reactive Forms</h1>
-
-    <nav>
-      <button type="button" (click)="toggleEditor('name')">Name Editor</button>
-      <button type="button" (click)="toggleEditor('profile')">
-        Profile Editor
-      </button>
-    </nav>
-
-    <app-name-editor *ngIf="showNameEditor"></app-name-editor>
 
     <app-profile-editor *ngIf="showProfileEditor"></app-profile-editor>
   `,
@@ -32,14 +22,14 @@ export type EditorType = 'name' | 'profile';
     `,
   ],
   imports: [
-    NameEditorComponent,
+    // NameEditorComponent,
     ProfileEditorComponent,
     NgIf,
     ReactiveFormsModule,
   ],
 })
 export class AppComponent {
-  editor: EditorType = 'name';
+  editor: EditorType = 'profile';
 
   get showNameEditor() {
     return this.editor === 'name';
@@ -49,7 +39,4 @@ export class AppComponent {
     return this.editor === 'profile';
   }
 
-  toggleEditor(type: EditorType) {
-    this.editor = type;
-  }
 }
